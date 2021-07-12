@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS tradewise_db;
+CREATE DATABASE tradewise_db;
