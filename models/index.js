@@ -9,7 +9,10 @@ Role.hasOne(User, {
   onDelete: 'CASCADE'
 });
 
-User.belongsTo(Role);
+User.belongsTo(Role, {
+    foreignKey: 'role_id',
+    onDelete: 'CASCADE'
+});
 
 User.hasOne(Category, {
   foreignKey: 'user_id',
@@ -26,8 +29,7 @@ User.hasOne(Item, {
 Item.belongsTo(User);
 
 Category.hasMany(Item, {
-  foreignKey: 'category_id',
-  onDelete: 'CASCADE'
+  foreignKey: 'category_id'
 });
 
 Item.belongsTo(Category);

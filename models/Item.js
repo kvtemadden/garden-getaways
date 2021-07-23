@@ -29,13 +29,6 @@ Item.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'user',
-        key: 'id',
-      },
-    },
     category_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -49,7 +42,7 @@ Item.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Item',
+    modelName: 'item',
   }
 );
 

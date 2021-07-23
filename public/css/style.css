@@ -12,6 +12,54 @@ body {
 
 }
 
+.custom-file-container__image-preview {
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  height: 250px;
+  width: 100%;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.custom-file-container__image-multi-preview {
+  position: relative;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  float: left;
+  margin: 1.858736059%;
+  width: 100%;
+  height: 100%;
+  box-shadow: none;
+}
+
+.l-form {
+  float: left;
+  max-width: 500px;
+}
+
+.clbt {
+  clear: both;
+}
+
+.r-form {
+  float: right;
+}
+
+.custom-file-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
 h1, h2, h4 {
   text-transform: uppercase;
   letter-spacing: -0.08rem;
@@ -269,6 +317,7 @@ p {
     background: #eaeaea;
     padding: 0px;
     padding-top: 2rem;
+    margin-top: 3rem;
   }
 
   .btn {
@@ -384,6 +433,7 @@ p {
   border-radius: 8px;
   border: solid #ccc 1px;
   z-index: 1;
+  width: 500px;
 }
 
 .comms {

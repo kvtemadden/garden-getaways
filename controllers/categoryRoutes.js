@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Job, Comment, User, Role } = require('../models');
+const { Job, User, Role } = require('../models');
 const withAuth = require('../utils/auth');
 
 
@@ -13,10 +13,8 @@ router.get('/new', withAuth, async (req, res) => {
     });
 
     const userValues = user.dataValues;
-    const checkCustomer = user.is_customer == 1 ? true : false;
 
-    res.render('postJob', {
-      checkCustomer,
+    res.render('createCategory', {
       logged_in: req.session.logged_in,
       userValues,
     });
@@ -188,10 +186,11 @@ router.get('/edit/:id', withAuth, async (req, res) => {
           model: User,
           attributes: ['username', 'picture']
         },
-        {
-          model: Role,
-          attributes: ['category']
-        }],
+        // {
+        //   model: Role,
+        //   attributes: ['category']
+        // }
+      ],
     });
 
     if (!jobData) {

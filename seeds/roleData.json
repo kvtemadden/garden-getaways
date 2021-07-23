@@ -1,29 +1,8 @@
 [
   {
-    "category": "Customer"
+    "user_role": "Admin"
   },
   {
-    "category": "Electrician"
-  },
-  {
-    "category": "Plumber"
-  },
-  {
-    "category": "Plasterer"
-  },
-  {
-    "category": "Carpenter"
-  },
-  {
-    "category": "Builder"
-  },
-  {
-    "category": "Glazier"
-  },
-  {
-    "category": "Gardener"
-  },
-  {
-    "category": "Decorator"
+    "user_role": "Editor"
   }
 ]

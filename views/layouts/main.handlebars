@@ -11,7 +11,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
         crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.css"/>
+        
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">  
+    <script src="/js/main.js" type="text/javascript"> </script>
+
+</script>
 </head>
 
 <body>
@@ -62,6 +68,22 @@
 </body>
 {{#if logged_in}}
 <script src="/js/signout.js"></script>
+       <script src="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.js"></script>
+
+        <script>
+            var upload = new FileUploadWithPreview("myUniqueUploadId", {
+                showDeleteButtonOnImages: true,
+                text: {
+                    chooseFile: "No file selected",
+                    browse: "Upload Image",
+                    selectedCount: "No file selected",
+                },
+            });
+
+            window.document.getElementById('replace-me').id = upload.backgroundImage;
+
+            module.exports = imgInfo;
+        </script>
 {{else}}
 <script src="/js/signinbtn.js"></script>
 {{/if}}
@@ -75,6 +97,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
 
 
 </html>

@@ -75,13 +75,13 @@ const signupForm = async (e) => {
   const email = document.querySelector('#signup-email').value.trim();
   const password = document.querySelector('#signup-password').value.trim();
   const role_id = document.querySelector('#signup-role').value.trim();
-  const is_customer = role_id == 1 ? true : false;
+  console.log(username, email, password, role_id)
 
   if (username && email && password && role_id) {
     // Sends a POST request to the 'user' endpoint
     const response = await fetch('/user/signup', {
       method: 'POST',
-      body: JSON.stringify({ username, email, password, role_id, is_customer }),
+      body: JSON.stringify({ username, email, password, role_id}),
       headers: { 'Content-Type': 'application/json' },
     });
 
@@ -89,6 +89,7 @@ const signupForm = async (e) => {
       document.location.replace('/dashboard');
     } else {
       toastr.info(response.statusText);
+      console.log(response)
       
     }
   }

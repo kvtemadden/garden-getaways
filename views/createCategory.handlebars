@@ -1,0 +1,49 @@
+<section>
+   <div class="container pmw centre-pane">
+    <div class="l-form">
+      <h5>Title</h5>
+      <p class="editable border rounded p5" contenteditable="true" id="newCategoryTitle" data-placeholder="Enter a job title"></p>
+    </div>
+    <div class="r-form">
+      <h5>Image</h5>
+  <div class="custom-file-container" id="replace-me" data-upload-id="myUniqueUploadId">
+            <label class="custom-file-container__custom-file">
+                <input
+                    type="file"
+                    class="custom-file-container__custom-file__custom-file-input"
+                    accept="*"
+                    multiple
+                    aria-label="Choose File"
+                />
+                <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                <span
+                    class="custom-file-container__custom-file__custom-file-control"
+                ></span>
+            </label>
+            <div class="custom-file-container__image-preview"></div>
+                  <label
+                >                <a
+                    href="javascript:void(0)"
+                    class="custom-file-container__image-clear hide"
+                    title="Clear Image"
+                    >&times;</a
+                ></label
+            >
+ 
+        </div>
+ 
+    </div>
+    <div class="l-form">
+      <h5>Description</h5>
+      <p class="editable border rounded p5" contenteditable="true" id="newCategoryDescription" data-placeholder="What job do you need doing?... Write a description here."></p>
+    </div>
+    
+    <div class="row mt-5 clbt">
+      <button class="button btn-primary align-center btn" id="createCategory">Submit</button>
+    </div>
+
+  </div>
+
+</section>
+
+<script src="/js/createCategory.js"></script>

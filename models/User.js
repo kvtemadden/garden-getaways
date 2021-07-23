@@ -46,11 +46,7 @@ User.init(
         model: 'role',
         key: 'id',
       },
-    },
-    is_customer: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
+    }
   },
   {
     hooks: {
