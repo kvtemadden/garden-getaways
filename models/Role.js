@@ -11,7 +11,7 @@ Role.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    category: {
+    user_role: {
       type: DataTypes.STRING,
       allowNull: false,
     },

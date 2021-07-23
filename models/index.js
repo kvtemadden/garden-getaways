@@ -1,7 +1,7 @@
 const User = require('./User');
-const Job = require('./Job');
-const Comment = require('./Comment');
+const Item = require('./Item');
 const Role = require('./Role');
+const Category = require('./Category');
 
 
 Role.hasOne(User, {
@@ -9,49 +9,27 @@ Role.hasOne(User, {
   onDelete: 'CASCADE'
 });
 
-User.belongsTo(Role, {
-    foreignKey: 'role_id',
-    onDelete: 'CASCADE'
-});
+User.belongsTo(Role);
 
-User.hasMany(Job, {
+User.hasOne(Category, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
 
-Role.hasMany(Job, {
-  foreignKey: 'role_id',
-  onDelete: 'CASCADE'
-});
+Category.belongsTo(User);
 
-Job.belongsTo(User, {
+User.hasOne(Item, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
 
-Job.belongsTo(Role, {
-  foreignKey: 'role_id',
+Item.belongsTo(User);
+
+Category.hasMany(Item, {
+  foreignKey: 'category_id',
   onDelete: 'CASCADE'
 });
 
-Comment.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: "cascade"
-});
+Item.belongsTo(Category);
 
-Comment.belongsTo(Job, {
-  foreignKey: 'job_id',
-  onDelete: "cascade"
-});
-
-User.hasMany(Comment, {
-  foreignKey: 'user_id',
-  onDelete: "cascade"
-});
-
-Job.hasMany(Comment, {
-  foreignKey: 'job_id',
-  onDelete: "cascade"
-})
-
-module.exports = { User, Job, Comment, Role };
+module.exports = { User, Item, Category, Role };

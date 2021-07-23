@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Job extends Model {}
+class Item extends Model {}
 
-Job.init(
+Item.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -14,6 +14,11 @@ Job.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg',
     },
     description: {
       type: DataTypes.STRING,
@@ -31,10 +36,10 @@ Job.init(
         key: 'id',
       },
     },
-    role_id: {
+    category_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'role',
+        model: 'category',
         key: 'id',
       },
     },
@@ -44,8 +49,8 @@ Job.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'job',
+    modelName: 'Item',
   }
 );
 
-module.exports = Job;
+module.exports = Item;

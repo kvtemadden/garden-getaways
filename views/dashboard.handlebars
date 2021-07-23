@@ -5,21 +5,8 @@
     </div>
 
     <div class="row mx-auto">
-        {{#if checkCustomer }}
-        <div class="border mx-auto col-sm-11 col-md-8 m-3 p-3">
-            <p>My Jobs</p>
-            {{#each myJobs as |myjob| }}
-            <div class="col-md-12 job-post">
-                <img class="sm-pp" src="{{myjob.user.picture}}">
-                <h2 class="padding job-header"><a href="/jobs/{{myjob.id}}">{{myjob.title}}</a></h2>
-                <p class="padding job-description">{{short myjob.description}}</p>
-                <p class="padding job-info">{{format_date myjob.date_created}}</p>
-            </div>
-            {{/each}}
-        </div>
-        {{else}}
         <div class="border col-sm-11 col-md-5 m-3 p-3">
-            <h3 class="mb-5">My Jobs</h3>
+            <h3 class="mb-5">Categories</h3>
             {{#each myJobs as |myjob| }}
             <div class="col-12 mb-5 job-post">
                 <img class="sm-pp" src="{{myjob.user.picture}}">
@@ -31,7 +18,7 @@
         </div>
         <div class="border col-sm-11 col-md-6 m-3 p-3">
 
-            <h3 class="mb-3">Current Jobs</h3>
+            <h3 class="mb-3">All items</h3>
             <div class="mb-4">
                 <label>Filter by:</label>
                 <select id="filter-jobs" class="custom-select" onchange="filterJobs(this.value);">
@@ -56,7 +43,6 @@
             </div>
             {{/each}}
         </div>
-        {{/if}}
     </div>
 </section>
 
