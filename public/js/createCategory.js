@@ -1,16 +1,16 @@
+
 const createCategory = async (event) => {
   event.preventDefault();
   
-  var role_id = document.querySelector('#job-type').value; 
-  var title = document.querySelector('#newJobTitle').innerHTML;
-  var description = document.querySelector('#newJobDescription').innerHTML;
-  var image = document.querySelector('#newImage').innerHTML;
+  var title = document.querySelector('#newCategoryTitle').innerHTML;
+  var description = document.querySelector('#newCategoryDescription').innerHTML;
+  var image = window.document.getElementById('img-id').getAttribute('data-img-id');
 
+  console.log(title, description, image);
 
     const response = await fetch("/categories/new", {
       method: 'POST',
       body: JSON.stringify({
-        role_id: role_id,
         categoryTitle: title,
         categoryDescription: description,
         categoryImage: image,
@@ -27,4 +27,4 @@ const createCategory = async (event) => {
     }
 };
 
-document.querySelector('#postCategory').addEventListener('click', createCategory);
+document.querySelector('#createCategory').addEventListener('click', createCategory);

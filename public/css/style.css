@@ -320,6 +320,10 @@ p {
     margin-top: 3rem;
   }
 
+  #newCategoryDescription {
+    height: 200px;
+  }
+
   .btn {
     width: fit-content;
     padding: 10px;

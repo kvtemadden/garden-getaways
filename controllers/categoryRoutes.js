@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Job, User, Role } = require('../models');
+const { Job, User, Role, Category } = require('../models');
 const withAuth = require('../utils/auth');
 
 
@@ -27,23 +27,18 @@ router.get('/new', withAuth, async (req, res) => {
 // Creating a new job record
 router.post('/new', withAuth, async (req, res) => {
   try {
-    const user = await User.findOne({
-      where: {
-        id: req.session.user_id,
-      },
+
+    const newCategory = await Category.create({
+      title: req.body.categoryTitle,
+      description: req.body.categoryDescription,
+      image: req.body.categoryImage
     });
 
-    const newJob = await Job.create({
-      title: req.body.jobTitle,
-      description: req.body.jobDescription,
-      user_id: req.session.user_id,
-      role_id: req.body.role_id,
-    });
-
-    res.status(200).json(newJob);
+    res.status(200).json(newCategory);
   }
   catch (err) {
     res.status(400).json(err);
+    console.log(err)
   }
 });
 
