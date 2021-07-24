@@ -320,6 +320,10 @@ p {
     margin-top: 3rem;
   }
 
+  .category-side {
+    width: 500px;
+  }
+
   #img-preview {
     height: 200px;
     width: 200px;

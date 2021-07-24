@@ -35,6 +35,10 @@ Item.init(
         model: 'category',
         key: 'id',
       },
+      item_url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      }
     },
   },
   {

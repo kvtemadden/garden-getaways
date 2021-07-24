@@ -33,6 +33,10 @@ Category.init(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    category_url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   },
   {
     sequelize,

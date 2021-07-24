@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Job, User, Role, Category } = require('../models');
+const { Job, User, Item, Category } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Main landing page for all traffic
@@ -41,13 +41,18 @@ router.get('/dashboard', withAuth, async (req, res) => {
           const userValues = user.dataValues;
 
         const allCategories = await Category.findAll();
+        const allItems = await Item.findAll();
+
 
         const categories = allCategories.map((category) => category.get({ plain: true }));
-        // const otherJobs = allJobs.map((job) => job.get({ plain: true }));
+        const items = allItems.map((item) => item.get({ plain: true }));
+
         console.log(categories)
+
         res.render('dashboard', {
             userValues,
             categories,
+            items,
             logged_in: req.session.logged_in,
         });
 
@@ -58,62 +63,37 @@ router.get('/dashboard', withAuth, async (req, res) => {
     }
 });
 
-// //Filtering by specific types of jobs
-// router.get('/dashboard/:id', withAuth, async (req, res) => {
-//   try {
-//       const user = await User.findOne({
-//           where: {
-//             id: req.session.user_id,
-//           },
-//         });
+//Filtering by specific types of jobs
+router.get('/dashboard/:category_url', withAuth, async (req, res) => {
+  try {
+    const allCategories = await Category.findAll();
+    const categories = allCategories.map((category) => category.get({ plain: true }));
 
-//       const userValues = user.dataValues;
-//       const checkCustomer = user.is_customer == 1 ? true : false;
 
-//       const userJobs = await Job.findAll({
-//            include: [
-//           {
-//             model: User,
-//             attributes: ['username', 'is_customer', 'picture']
-//           },
-//           // {
-//           //   model: Role,
-//           //   attributes: ['category']
-//           // }
-//         ],
-//           where: { user_id: req.session.user_id },
-//           order: [['date_created', 'ASC']],
-//       });
+      const category = await Category.findOne({
+          where: {
+            category_url: req.params.category_url,
+          },
+        });
 
-//       const allJobs = await Job.findAll({    
-//           include: [
-//           {
-//             model: User,
-//             attributes: ['username', 'is_customer', 'picture']
-//           },
-//           // {
-//           //   model: Role,
-//           //   attributes: ['category']
-//           // }
-//         ],
-//           where: { role_id: req.params.id, },
-//           order: [['date_created', 'ASC']],
-//       });
+      const categoryItems = await Item.findAll({
+          where: { category_id: category.id },
+          order: [['date_created', 'ASC']],
+      });
 
-//       const myJobs = userJobs.map((job) => job.get({ plain: true }));
-//       const otherJobs = allJobs.map((job) => job.get({ plain: true }));
+      const items = categoryItems.map((item) => item.get({ plain: true }));
 
-//       res.render('dashboard', {
-//           myJobs,
-//           otherJobs,
-//           userValues,
-//           logged_in: req.session.logged_in,
-//       });
+      res.render('dashboard', {
+          items,
+          categories,
+          logged_in: req.session.logged_in,
+      });
 
-//   }
-//   catch (err) {
-//       res.status(500).json(err);
-//   }
-// });
+  }
+  catch (err) {
+      res.status(500).json(err);
+      console.log(err)
+  }
+});
 
 module.exports = router;

@@ -1,0 +1,35 @@
+<section>
+   <div class="container pmw centre-pane">
+    <div class="l-form">
+      <h5>Title</h5>
+      <p class="editable border rounded p5" contenteditable="true" id="newItemTitle" data-placeholder="Enter a job title"></p>
+    </div>
+    <div class="r-form">
+      <h5>Image</h5>
+      <div><img id="img-preview"></img></div>
+      <button id="upload_widget" class="cloudinary-button">Upload files</button>
+    </div>
+    <div class="category-side">
+    <h5>Item Item</h5>
+
+      <select id="item-category" class="custom-select" required>
+    <option value="">Choose...</option>
+    {{#each categories as |category| }}
+    <option value="{{category.id}}">{{category.title}}</option>
+    {{/each}}
+  </select>
+  </div>
+    <div class="l-form mt-3">
+      <h5>Description</h5>
+      <p class="editable border rounded p5" contenteditable="true" id="newItemDescription" data-placeholder="What job do you need doing?... Write a description here."></p>
+    </div>
+    
+    <div class="row mt-5 clbt">
+      <button class="button btn-primary align-center btn" id="createItem">Submit</button>
+    </div>
+
+  </div>
+
+</section>
+
+<script src="/js/createItem.js"></script>

@@ -1,0 +1,12 @@
+{{!-- Actual job page (when you click on a job, you see the job info/comments) --}}
+<section>
+   {{#each items as |item| }}
+            <div class="col-12 mb-5 item-post" style="background-image: url({{item.image}})">
+                <h2 class="padding item-header"><a href="/categories/{{item.item_url}}">{{item.title}}</a></h2>
+                <p class="padding item-description">{{item.description}}</p>
+            </div>
+            {{/each}}
+</section>
+
+<script src="/js/comment.js"></script>
+<script src="/js/delete.js"></script>

@@ -69,21 +69,6 @@
 {{#if logged_in}}
 <script src="/js/signout.js"></script>
        <script src="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.js"></script>
-
-        <script>
-            var upload = new FileUploadWithPreview("myUniqueUploadId", {
-                showDeleteButtonOnImages: true,
-                text: {
-                    chooseFile: "No file selected",
-                    browse: "Upload Image",
-                    selectedCount: "No file selected",
-                },
-            });
-
-            window.document.getElementById('img-id').setAttribute('data-img-id', upload.backgroundImage);
-
-            module.exports = imgInfo;
-        </script>
 {{else}}
 <script src="/js/signinbtn.js"></script>
 {{/if}}

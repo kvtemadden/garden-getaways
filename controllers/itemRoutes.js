@@ -1,16 +1,7 @@
 const router = require('express').Router();
-const { Job, User, Item, Category } = require('../models');
+const { Job, User, Category, Item } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
-  try {
-    const categories = await Category.findAll();
-    res.status(200).json(categories);
-  }
-  catch (err) {
-    res.status(400).json(err);
-    }
-});
 
 // Renders page to post a job
 router.get('/new', withAuth, async (req, res) => {
@@ -21,10 +12,16 @@ router.get('/new', withAuth, async (req, res) => {
       },
     });
 
+    const allCategories = await Category.findAll();
+
+    const categories = allCategories.map((category) => category.get({ plain: true }));
+
+
     const userValues = user.dataValues;
 
-    res.render('createCategory', {
+    res.render('createItem', {
       logged_in: req.session.logged_in,
+      categories,
       userValues,
     });
   }
@@ -36,14 +33,14 @@ router.get('/new', withAuth, async (req, res) => {
 // Creating a new job record
 router.post('/new', withAuth, async (req, res) => {
   try {
-    const newCategory = await Category.create({
-      title: req.body.categoryTitle,
-      description: req.body.categoryDescription,
-      image: req.body.categoryImage,
-      category_url: req.body.categoryURL
+    const newItem = await Item.create({
+      title: req.body.itemTitle,
+      description: req.body.itemDescription,
+      image: req.body.itemImage,
+      category_id: req.body.itemCategory,
+      itemURL: req.body.itemURL
     });
-
-    res.status(200).json(newCategory);
+    res.status(200).json(newItem);
   }
   catch (err) {
     res.status(400).json(err);
@@ -104,42 +101,59 @@ router.put('/edit/:id', withAuth, async (req, res) => {
 // ------------ Routes for Single Job Page -------------
 
 // Gets single job page and comments
-router.get('/:category_url', withAuth, async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
   try {
-    //find the category
-    const category = await Category.findOne({
+    const user = await User.findOne({
       where: {
-        category_url: req.params.category_url
+        id: req.session.user_id,
       },
     });
 
-    const allItems = await Item.findAll({
-      where: {
-        category_id: category.id,
-      }
-    });
-    console.log("Item: " + JSON.stringify(category));
+    const userValues = user.dataValues;
+    const checkCustomer = user.is_customer == 1 ? true : false;
 
-    if (!category) {
+    const jobData = await Job.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'content', 'job_id', 'user_id', 'date_created'],
+          include: {
+            model: User,
+            attributes: ['username', 'picture']
+          }
+        },
+        {
+          model: User,
+          attributes: ['username', 'picture']
+        }],
+    });
+
+    if (!jobData) {
       res.status(404).json(
         {
-          message: 'No job found!'
+          message: 'No job found with this id!'
         });
       return;
     }
 
-    const items = allItems.map((item) => item.get({ plain: true }));
+    const job = jobData.get({ plain: true });
+    const isUserJob = req.session.user_id == job.user_id ? true : false;
 
-    res.render('singleCategory', {
-      items,
+    res.render('singleJob', {
+      job,
       logged_in: req.session.logged_in,
+      isUserJob,
+      userValues,
+      checkCustomer,
     });
 
     res.status(200);
   }
   catch (err) {
     res.status(500).json(err);
-    console.log(err)
   }
 });
 
@@ -174,7 +188,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
         },
         // {
         //   model: Role,
-        //   attributes: ['category']
+        //   attributes: ['item']
         // }
       ],
     });

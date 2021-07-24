@@ -9,9 +9,8 @@
             <h3 class="mb-5">Categories</h3>
             <a class="btn white" href="categories/new">Add a new category +</a>
             {{#each categories as |category| }}
-            <div class="col-12 mb-5 job-post">
-                <img class="sm-pp" src={{category.image}}></img>
-                <h2 class="padding job-header"><a href="/categories/{{category.title}}">{{category.title}}</a></h2>
+            <div class="col-12 mb-5 job-post" style="background-image: url({{category.image}})">
+                <h2 class="padding job-header"><a href="/categories/{{category.category_url}}">{{category.title}}</a></h2>
                 <p class="padding job-description">{{category.description}}</p>
             </div>
             {{/each}}
@@ -19,27 +18,20 @@
         <div class="border col-sm-11 col-md-6 m-3 p-3">
 
             <h3 class="mb-3">All items</h3>
+            <a class="btn white" href="items/new">Add a new item +</a>
+
             <div class="mb-4">
                 <label>Filter by:</label>
                 <select id="filter-jobs" class="custom-select" onchange="filterJobs(this.value);">
-                    <option value="">Choose...</option>
-                    <option value="1">Customer</option>
-                    <option value="2">Electrician</option>
-                    <option value="3">Carpenter</option>
-                    <option value="4">Glazier</option>
-                    <option value="5">Gardener</option>
-                    <option value="6">Plumber</option>
-                    <option value="7">Builder</option>
-                    <option value="8">Plasterer</option>
-                    <option value="9">Decorator</option>
+                    {{#each categories as |category| }}
+    <option value="{{category.category_url}}">{{category.title}}</option>
+    {{/each}}
                 </select>
             </div>
-            {{#each otherJobs as |ojob| }}
-            <div class="col-12 mb-5 job-post">
-                <img class="sm-pp" src="{{ojob.user.picture}}">
-                <h2 class="padding job-header"><a href="/jobs/{{ojob.id}}">{{ojob.title}}</a></h2>
-                <p class="padding job-description">{{short ojob.description}}</p>
-                <p class="padding job-info">{{format_date ojob.date_created}} | {{ojob.user.username}}</p>
+               {{#each items as |item| }}
+            <div class="col-12 mb-5 job-post" style="background-image: url({{item.image}})">
+                <h2 class="padding job-header"><a href="/categories/{{item.item_url}}">{{item.title}}</a></h2>
+                <p class="padding job-description">{{item.description}}</p>
             </div>
             {{/each}}
         </div>
