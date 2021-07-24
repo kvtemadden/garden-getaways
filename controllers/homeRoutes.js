@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Job, User, Role } = require('../models');
+const { Job, User, Role, Category } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Main landing page for all traffic
@@ -39,40 +39,22 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 
           const userValues = user.dataValues;
-          console.log(userValues)
 
-        // const userJobs = await Job.findAll({
-        //      include: [
-        //     {
-        //       model: User,
-        //       attributes: ['username', 'picture']
-        //     }
-        //   ],
-        //     where: { user_id: req.session.user_id },
-        //     order: [['date_created', 'ASC']],
-        // });
+        const allCategories = await Category.findAll();
 
-        // const allJobs = await Job.findAll({    
-        //     include: [
-        //     {
-        //       model: User,
-        //       attributes: ['username', 'picture']
-        //     }
-        //   ],
-        //     order: [['date_created', 'ASC']],
-        // });
-
-        // const myJobs = userJobs.map((job) => job.get({ plain: true }));
+        const categories = allCategories.map((category) => category.get({ plain: true }));
         // const otherJobs = allJobs.map((job) => job.get({ plain: true }));
-
+        console.log(categories)
         res.render('dashboard', {
             userValues,
+            categories,
             logged_in: req.session.logged_in,
         });
 
     }
     catch (err) {
         res.status(500).json(err);
+        console.log(err)
     }
 });
 

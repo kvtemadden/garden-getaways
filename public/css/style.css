@@ -320,6 +320,11 @@ p {
     margin-top: 3rem;
   }
 
+  #img-preview {
+    height: 200px;
+    width: 200px;
+  }
+
   #newCategoryDescription {
     height: 200px;
   }

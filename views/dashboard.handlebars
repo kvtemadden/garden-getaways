@@ -8,12 +8,11 @@
         <div class="border col-sm-11 col-md-5 m-3 p-3">
             <h3 class="mb-5">Categories</h3>
             <a class="btn white" href="categories/new">Add a new category +</a>
-            {{#each myJobs as |myjob| }}
+            {{#each categories as |category| }}
             <div class="col-12 mb-5 job-post">
-                <img class="sm-pp" src="{{myjob.user.picture}}">
-                <h2 class="padding job-header"><a href="/jobs/{{myjob.id}}">{{myjob.title}}</a></h2>
-                <p class="padding job-description">{{short myjob.description}}</p>
-                <p class="padding job-info">{{format_date myjob.date_created}}</p>
+                <img class="sm-pp" src={{category.image}}></img>
+                <h2 class="padding job-header"><a href="/categories/{{category.title}}">{{category.title}}</a></h2>
+                <p class="padding job-description">{{category.description}}</p>
             </div>
             {{/each}}
         </div>
