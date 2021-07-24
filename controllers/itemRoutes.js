@@ -2,8 +2,18 @@ const router = require('express').Router();
 const { Job, User, Category, Item } = require('../models');
 const withAuth = require('../utils/auth');
 
+//Get all items
+router.get('/', async (req, res) => {
+  try {
+    const items = await Item.findAll();
+    res.status(200).json(items);
+  }
+  catch (err) {
+    res.status(400).json(err);
+    }
+});
 
-// Renders page to post a job
+// Renders page to add an item
 router.get('/new', withAuth, async (req, res) => {
   try {
     const user = await User.findOne({
@@ -30,124 +40,106 @@ router.get('/new', withAuth, async (req, res) => {
   }
 });
 
-// Creating a new job record
+// Creating a new jitem
 router.post('/new', withAuth, async (req, res) => {
   try {
+
+    console.log(req.body)
     const newItem = await Item.create({
       title: req.body.itemTitle,
       description: req.body.itemDescription,
       image: req.body.itemImage,
       category_id: req.body.itemCategory,
-      itemURL: req.body.itemURL
+      item_url: req.body.itemURL,
     });
     res.status(200).json(newItem);
   }
   catch (err) {
     res.status(400).json(err);
+    console.log(err)
     }
 });
 
-// Deleting a job record
-router.delete('/:id', withAuth, async (req, res) => {
-  try {
-    const deleteJob = await Job.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
+// // Deleting a job record
+// router.delete('/:id', withAuth, async (req, res) => {
+//   try {
+//     const deleteJob = await Job.destroy({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
 
-    if (!deleteJob) {
-      res.status(404).json({
-        message: 'No job found with this id!'
-      });
-      return;
-    }
+//     if (!deleteJob) {
+//       res.status(404).json({
+//         message: 'No job found with this id!'
+//       });
+//       return;
+//     }
 
-    res.status(200).json(deleteJob);
-  }
-  catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.status(200).json(deleteJob);
+//   }
+//   catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
-// Updating a job record
-router.put('/edit/:id', withAuth, async (req, res) => {
-  try {
-    const thisJob = await Job.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
+// // Updating a job record
+// router.put('/edit/:id', withAuth, async (req, res) => {
+//   try {
+//     const thisJob = await Job.update(req.body, {
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
 
-    thisJob.title = req.body.title;
-    thisJob.description = req.body.description;
-    thisJob.role_id = req.body.role_id;
+//     thisJob.title = req.body.title;
+//     thisJob.description = req.body.description;
+//     thisJob.role_id = req.body.role_id;
 
-    if (!thisJob) {
-      res.status(404).json({
-        message: 'No job found with this id!'
-      });
-      return;
-    }
+//     if (!thisJob) {
+//       res.status(404).json({
+//         message: 'No job found with this id!'
+//       });
+//       return;
+//     }
 
-    res.status(200).json(thisJob);
-  }
-  catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.status(200).json(thisJob);
+//   }
+//   catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 
 // ------------ Routes for Single Job Page -------------
 
 // Gets single job page and comments
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:item_url', withAuth, async (req, res) => {
   try {
-    const user = await User.findOne({
+    const findItem = await Item.findOne({
       where: {
-        id: req.session.user_id,
-      },
-    });
-
-    const userValues = user.dataValues;
-    const checkCustomer = user.is_customer == 1 ? true : false;
-
-    const jobData = await Job.findOne({
-      where: {
-        id: req.params.id
+        item_url: req.params.item_url,
       },
       include: [
         {
-          model: Comment,
-          attributes: ['id', 'content', 'job_id', 'user_id', 'date_created'],
-          include: {
-            model: User,
-            attributes: ['username', 'picture']
-          }
-        },
-        {
-          model: User,
-          attributes: ['username', 'picture']
-        }],
+          model: Category,
+        }
+      ],
     });
 
-    if (!jobData) {
+    if (!findItem) {
       res.status(404).json(
         {
-          message: 'No job found with this id!'
+          message: 'No item found!'
         });
       return;
     }
 
-    const job = jobData.get({ plain: true });
-    const isUserJob = req.session.user_id == job.user_id ? true : false;
+    const item = findItem.get({ plain: true });
 
-    res.render('singleJob', {
-      job,
+    res.render('singleItem', {
+      item,
       logged_in: req.session.logged_in,
-      isUserJob,
-      userValues,
-      checkCustomer,
     });
 
     res.status(200);

@@ -16,10 +16,6 @@ const createCategory = async (event) => {
 
   //prevent duplicate url
   var count = [];
-  var lastCount = 0;
-
-  debugger;
-
 
   function checkDupURL() {
   for(var i = 0; i < fetchedCategories.length; i++) {

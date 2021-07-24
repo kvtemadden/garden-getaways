@@ -1,5 +1,10 @@
 var imgPreview = document.getElementById('img-preview');
+var fetchedItems;
 
+const categories = fetch('/items')
+  .then(response => response.json())
+  .then(data => fetchedItems = data);
+  
 const createItem = async (event) => {
   event.preventDefault();
   
@@ -8,7 +13,24 @@ const createItem = async (event) => {
   var category = document.querySelector('#item-category').value.trim();
   var image = window.document.getElementById('img-preview').src;
   var itemURL = title.replace(/\s+/g, '-').toLowerCase();
-  console.log(category)
+
+  //prevent duplicate url
+  var count = [];
+
+  function checkDupURL() {
+  for(var i = 0; i < fetchedItems.length; i++) {
+    if (fetchedItems[i].item_url == itemURL) {
+      count.push(itemURL);
+    }
+  }
+  }
+
+  checkDupURL();
+
+  if (count.length > 0) {
+    let dupNum = count.length;
+    itemURL = itemURL + dupNum;
+    }
 
   const response = await fetch("/items/new", {
       method: 'POST',
