@@ -12,7 +12,9 @@
         crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css"
         href="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.css" />
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">  </script>
+
 </head>
 
 <body>
@@ -65,8 +67,6 @@
 </body>
 {{#if logged_in}}
 <script src="/js/signout.js"></script>
-<script src="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.js"></script>
-
 {{else}}
 <script src="/js/signinbtn.js"></script>
 {{/if}}
@@ -74,13 +74,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">  </script>
 <script src="/js/main.js" type="text/javascript"> </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
     integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
     crossorigin="anonymous"></script>
-<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
 </script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"

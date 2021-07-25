@@ -1,0 +1,25 @@
+<section>
+   <div class="container pmw centre-pane">
+    <div class="l-form">
+      <h5>Title</h5>
+      <p class="editable border rounded p5" contenteditable="true" id="newCategoryTitle" data-placeholder="Enter a job title">{{category.title}}</p>
+    </div>
+    <div class="r-form">
+      <h5>Image</h5>
+      <div><img id="img-preview" src={{category.image}}></img></div>
+      <button id="upload_widget" class="cloudinary-button">Upload files</button>
+    </div>
+    <div class="l-form">
+      <h5>Description</h5>
+      <p class="editable border rounded p5" contenteditable="true" id="newCategoryDescription" data-placeholder="What job do you need doing?... Write a description here.">{{category.description}}</p>
+    </div>
+    
+    <div class="row mt-5 clbt">
+      <button class="button btn-primary align-center btn" id="updateCategory">Update Category</button>
+    </div>
+
+  </div>
+
+</section>
+
+<script src="/js/editCategory.js"></script>

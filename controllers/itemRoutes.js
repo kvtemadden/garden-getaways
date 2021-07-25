@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Job, User, Category, Item } = require('../models');
+const { User, Item, Category } = require('../models');
 const withAuth = require('../utils/auth');
 
 //Get all items
@@ -150,56 +150,39 @@ router.get('/:item_url', withAuth, async (req, res) => {
 });
 
 // Gets the edit job page
-router.get('/edit/:id', withAuth, async (req, res) => {
+router.get('/edit/:item_url', withAuth, async (req, res) => {
   try {
-    const user = await User.findOne({
+    const itemData = await Item.findOne({
       where: {
-        id: req.session.user_id,
+        item_url: req.params.item_url,
       },
     });
 
-    const userValues = user.dataValues;
-    const checkCustomer = user.is_customer == 1 ? true : false;
+    const item = itemData.dataValues;
 
-    const jobData = await Job.findOne({
+    const matchedCategory = await Category.findOne({
       where: {
-        id: req.params.id
+        id: item.category_id,
       },
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'content', 'job_id', 'user_id', 'date_created'],
-          include: {
-            model: User,
-            attributes: ['username', 'picture']
-          }
-        },
-        {
-          model: User,
-          attributes: ['username', 'picture']
-        },
-        // {
-        //   model: Role,
-        //   attributes: ['item']
-        // }
-      ],
     });
 
-    if (!jobData) {
+    const allCategories = await Category.findAll();
+
+    const categories = allCategories.map((category) => category.get({ plain: true }));
+
+    if (!item) {
       res.status(404).json(
         {
-          message: 'No job found with this id!'
+          message: 'No item found!'
         });
       return;
     }
 
-    const job = jobData.get({ plain: true });
-
-    res.render('editJob', {
-      job,
-      userValues,
+    res.render('editItem', {
+      item,
+      matchedCategory,
+      categories,
       logged_in: req.session.logged_in,
-      checkCustomer,
     });
 
     res.status(200);
@@ -208,6 +191,36 @@ router.get('/edit/:id', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// Updating a item record
+router.put('/edit/:item_url', withAuth, async (req, res) => {
+  try {
+    const item = await Item.findOne({
+      where: {
+        item_url: req.params.item_url
+      },
+    });
+
+    const thisItem = await Item.update(req.body, {
+      where: {
+        id: item.id,
+      },
+    });
+
+    if (!thisItem) {
+      res.status(404).json({
+        message: 'No item found!'
+      });
+      return;
+    }
+
+    res.status(200).json(thisItem);
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 
 // New comments

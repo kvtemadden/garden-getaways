@@ -10,6 +10,11 @@ module.exports = {
         str = `${str}...`;
          return str
       } 
+    },
+    select: (id, current) => {
+      if (id == current) {
+        return true;
+      }
     }
   };
   

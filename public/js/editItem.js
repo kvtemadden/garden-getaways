@@ -1,55 +1,43 @@
 var imgPreview = document.getElementById('img-preview');
 var fetchedItems;
 
-const categories = fetch('/categories')
-  .then(response => response.json())
-  .then(data => fetchedItems = data);
-  
-const createItem = async (event) => {
+var categoryID = document.getElementById('currentID').getAttribute('data-id');
+var categoryDD = document.querySelector('#item-category');
+categoryDD.value = categoryID;
+//get current item url
+  var id = window.location.href.toString().split('items/')[1];
+ 
+  if (id.includes("edit/")) {
+    id = id.split('edit/')[1];
+  }
+
+const updateItem = async (event) => {
   event.preventDefault();
   
   var title = document.querySelector('#newItemTitle').innerHTML;
   var description = document.querySelector('#newItemDescription').innerHTML;
   var category = document.querySelector('#item-category').value.trim();
   var image = window.document.getElementById('img-preview').src;
-  var itemURL = title.replace(/\s+/g, '-').toLowerCase();
+  var itemURL = title.replace(/\s+/g, '-').toLowerCase();  
 
-  //prevent duplicate url
-  var count = [];
-
-  function checkDupURL() {
-  for(var i = 0; i < fetchedItems.length; i++) {
-    if (fetchedItems[i].item_url == itemURL) {
-      count.push(itemURL);
-    }
-  }
-  }
-
-  checkDupURL();
-
-  if (count.length > 0) {
-    let dupNum = count.length;
-    itemURL = itemURL + dupNum;
-    }
-
-  const response = await fetch("/items/new", {
-      method: 'POST',
+  const response = await fetch("/items/edit/"+id, {
+      method: 'PUT',
       body: JSON.stringify({
-        itemTitle: title,
-        itemDescription: description,
-        itemImage: image,
-        itemCategory: category,
-        itemURL: itemURL
+        title: title,
+        category: category,
+        description: description,
+        image: image,
+        item_url: itemURL,
       }),
       headers: { 'Content-Type': 'application/json' },
     })
 
     if (response.ok) {
-      toastr.success('Item added!');
+      toastr.success('Item updated!');
       document.location.replace('/dashboard');
     
     } else {
-      toastr.error('Failed to create item');
+      toastr.error('Failed to update category');
     }
 };
 
@@ -68,4 +56,4 @@ document.getElementById("upload_widget").addEventListener("click", function(){
     myWidget.open();
   }, false);
 
-document.querySelector('#createItem').addEventListener('click', createItem);
+document.querySelector('#updateItem').addEventListener('click', updateItem);

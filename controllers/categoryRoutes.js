@@ -73,27 +73,29 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 });
 
-// Updating a job record
-router.put('/edit/:id', withAuth, async (req, res) => {
+// Updating a category record
+router.put('/edit/:category_url', withAuth, async (req, res) => {
   try {
-    const thisJob = await Job.update(req.body, {
+    const category = await Category.findOne({
       where: {
-        id: req.params.id,
+        category_url: req.params.category_url
       },
     });
 
-    thisJob.title = req.body.title;
-    thisJob.description = req.body.description;
-    thisJob.role_id = req.body.role_id;
+    const thisCategory = await Category.update(req.body, {
+      where: {
+        id: category.id,
+      },
+    });
 
-    if (!thisJob) {
+    if (!thisCategory) {
       res.status(404).json({
-        message: 'No job found with this id!'
+        message: 'No category found!'
       });
       return;
     }
 
-    res.status(200).json(thisJob);
+    res.status(200).json(thisCategory);
   }
   catch (err) {
     res.status(500).json(err);
@@ -144,56 +146,27 @@ router.get('/:category_url', withAuth, async (req, res) => {
 });
 
 // Gets the edit job page
-router.get('/edit/:id', withAuth, async (req, res) => {
+router.get('/edit/:category_url', withAuth, async (req, res) => {
   try {
-    const user = await User.findOne({
+    const thisCategory = await Category.findOne({
       where: {
-        id: req.session.user_id,
+        category_url: req.params.category_url,
       },
     });
 
-    const userValues = user.dataValues;
-    const checkCustomer = user.is_customer == 1 ? true : false;
-
-    const jobData = await Job.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'content', 'job_id', 'user_id', 'date_created'],
-          include: {
-            model: User,
-            attributes: ['username', 'picture']
-          }
-        },
-        {
-          model: User,
-          attributes: ['username', 'picture']
-        },
-        // {
-        //   model: Role,
-        //   attributes: ['category']
-        // }
-      ],
-    });
-
-    if (!jobData) {
+    if (!thisCategory) {
       res.status(404).json(
         {
-          message: 'No job found with this id!'
+          message: 'No category found!'
         });
       return;
     }
 
-    const job = jobData.get({ plain: true });
+    const category = thisCategory.dataValues;
 
-    res.render('editJob', {
-      job,
-      userValues,
+    res.render('editCategory', {
+      category,
       logged_in: req.session.logged_in,
-      checkCustomer,
     });
 
     res.status(200);
@@ -204,21 +177,21 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 });
 
 
-// New comments
-router.post('/:id', withAuth, async (req, res) => {
-  try {
-    const newComment = await Comment.create({
-      content: req.body.content,
-      user_id: req.session.user_id,
-      job_id: req.body.job_id,
-    });
+// // New comments
+// router.post('/:id', withAuth, async (req, res) => {
+//   try {
+//     const newComment = await Comment.create({
+//       content: req.body.content,
+//       user_id: req.session.user_id,
+//       job_id: req.body.job_id,
+//     });
 
-    res.status(200).json(newComment);
-  }
-  catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.status(200).json(newComment);
+//   }
+//   catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 
 module.exports = router;
