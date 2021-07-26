@@ -50,23 +50,29 @@ router.post('/new', withAuth, async (req, res) => {
     }
 });
 
-// Deleting a job record
-router.delete('/:id', withAuth, async (req, res) => {
+// Deleting a category record
+router.delete('/:category_url', withAuth, async (req, res) => {
   try {
-    const deleteJob = await Job.destroy({
+    const category = await Category.findOne({
       where: {
-        id: req.params.id,
+        category_url: req.params.category_url,
+      }
+    })
+
+    const deleteCategory = await Category.destroy({
+      where: {
+        id: category.id,
       },
     });
 
-    if (!deleteJob) {
+    if (!category) {
       res.status(404).json({
-        message: 'No job found with this id!'
+        message: 'No category found!'
       });
       return;
     }
 
-    res.status(200).json(deleteJob);
+    res.status(200).json(deleteCategory);
   }
   catch (err) {
     res.status(500).json(err);

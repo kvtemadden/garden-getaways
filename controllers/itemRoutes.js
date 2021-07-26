@@ -60,28 +60,35 @@ router.post('/new', withAuth, async (req, res) => {
     }
 });
 
-// // Deleting a job record
-// router.delete('/:id', withAuth, async (req, res) => {
-//   try {
-//     const deleteJob = await Job.destroy({
-//       where: {
-//         id: req.params.id,
-//       },
-//     });
+// Deleting a job record
+router.delete('/:item_url', withAuth, async (req, res) => {
+  try {
+    const item = await Item.findOne({
+      where: {
+        item_url: req.params.item_url,
+      }
+    })
 
-//     if (!deleteJob) {
-//       res.status(404).json({
-//         message: 'No job found with this id!'
-//       });
-//       return;
-//     }
+    const deleteItem = await Item.destroy({
+      where: {
+        id: item.id,
+      },
+    });
 
-//     res.status(200).json(deleteJob);
-//   }
-//   catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+    if (!item) {
+      res.status(404).json({
+        message: 'No item found!'
+      });
+      return;
+    }
+
+    res.status(200).json(deleteItem);
+  }
+  catch (err) {
+    res.status(500).json(err);
+    console.log(err)
+  }
+});
 
 // // Updating a job record
 // router.put('/edit/:id', withAuth, async (req, res) => {
