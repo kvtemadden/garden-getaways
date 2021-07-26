@@ -3,18 +3,22 @@ const { Job, User, Item, Category } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Main landing page for all traffic
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
       const user = User.findOne({
         where: {
           id: req.session.user_id,
         },
       });
 
+      const theseCategories = await Category.findAll();
+      const categories = theseCategories.map((category) => category.get({ plain: true }));
+
       const userValues = user.dataValues;
-      console.log(userValues)
-    res.render('homepage', {
+
+      res.render('homepage', {
         logged_in: req.session.logged_in,
         userValues,
+        categories,
       });
 });
 

@@ -121,7 +121,7 @@ router.delete('/:item_url', withAuth, async (req, res) => {
 // ------------ Routes for Single Job Page -------------
 
 // Gets single job page and comments
-router.get('/:item_url', withAuth, async (req, res) => {
+router.get('/:item_url', async (req, res) => {
   try {
     const findItem = await Item.findOne({
       where: {

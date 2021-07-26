@@ -1,12 +1,17 @@
-{{!-- Actual job page (when you click on a job, you see the job info/comments) --}}
-<section>
-   {{#each items as |item| }}
-            <div class="col-12 mb-5 item-post" style="background-image: url({{item.image}})">
-                <h2 class="padding item-header"><a href="/categories/{{item.item_url}}">{{item.title}}</a></h2>
-                <p class="padding item-description">{{item.description}}</p>
-            </div>
-            {{/each}}
-</section>
+<div class="container-fluid justify-content-center mt-5">
 
+<h2>{{category.title}}</h2>
+<a href="/shop">Back to Categories</a>
+
+<div class="row category-row">
+{{#each items as |item| }}
+<div class="col-xs-6 col-sm-4 col-xl-3 mt-5 idv">
+    <a href="/items/{{item.item_url}}"><div class="cat-img" style="background-image: url({{item.image}})"></div></a>
+    <a href="/items/{{item.item_url}}"><h4>{{item.title}}</h4></a>
+</div>
+{{/each}}
+</div>
+
+</div>
 <script src="/js/comment.js"></script>
 <script src="/js/delete.js"></script>

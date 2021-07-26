@@ -1,0 +1,86 @@
+[
+  {
+    "title": "Small shed",
+    "image": "https://www.waltons.co.uk/_imagesWT/products/2018-SI-001-004-0013%201.jpg?w=570&h=320",
+    "description": "Wooden builds",
+    "category_id": 1,
+    "item_url":"small-shed"
+  },
+  {
+    "title": "Medium shed",
+    "image": "https://www.robertdyas.co.uk/media/catalog/product/cache/ee7f57371963fdaf9f4353c1acf7bd18/2/1/216417_-_2_2.jpg?w=570&h=320",
+    "description": "Wooden builds",
+    "category_id": 1,
+    "item_url":"medium-shed"
+  },
+  {
+    "title": "Wooden bar",
+    "image": "https://images2.drct2u.com/pdp_main_desktop_x2/products/nq/nq559/u01nq559504s.jpg?w=570&h=320",
+    "description": "Wooden builds",
+    "category_id": 1,
+    "item_url":"wooden-bar"
+  },
+  {
+    "title": "Small building",
+    "image": "?w=570&h=320?w=570&h=320",
+    "description": "Majority glass builds",
+    "category_id": 2,
+    "item_url":"small-building"
+  },
+  {
+    "title": "Glass office",
+    "image": "https://cdn.trendir.com/wp-content/uploads/2016/10/Garden-pavillion-guest-house-and-office-900x676.jpg?w=570&h=320",
+    "description": "Majority glass builds",
+    "category_id": 2,
+    "item_url":"glass-office"
+  },
+  {
+    "title": "Glass shed",
+    "image": "https://www.robertdyas.co.uk/cdn-cgi/image/width=1200,quality=75/https://www.robertdyas.co.uk/media/catalog/product/cache/ee7f57371963fdaf9f4353c1acf7bd18/2/1/216307_-_2.jpg?w=570&h=320",
+    "description": "Majority glass builds",
+    "category_id": 2,
+    "item_url":"glass-shed"
+  },
+  {
+    "title": "Brick shed",
+    "image": "https://i0.wp.com/rpageconcretebuildings.com/wp-content/uploads/2020/03/Accent-london-stock-brick-cladding-scaled.jpeg?fit=2560%2C1920&ssl=1?w=570&h=320",
+    "description": "Brick builds",
+    "category_id": 3,
+    "item_url":"brick-shed"
+  },
+  {
+    "title": "Brick outhouse",
+    "image": "http://thumbsnap.com/sc/MQQ5PjnB.jpg?fit=2560%2C1920&ssl=1?w=570&h=320",
+    "description": "Brick builds",
+    "category_id": 3,
+    "item_url":"brick-outhouse"
+  },
+  {
+    "title": "Back Garden Gym",
+    "image": "https://suppliers.thegardenroomguide.co.uk/wp-content/uploads/2016/03/Garden-Gyms-by-Bathstone-Garden-Rooms-2-1.jpg?fit=2560%2C1920&ssl=1?w=570&h=320",
+    "description": "Brick builds",
+    "category_id": 3,
+    "item_url":"back-garden-gym"
+  },
+  {
+    "title": "Garden Pod",
+    "image": "https://www.gardenaffairs.co.uk/assets/components/phpthumbof/cache/mini-office-jpg.de8708defd43107242fb65b2fa11d713.jpg?fit=2560%2C1920&ssl=1?w=570&h=320",
+    "description": "Plastic builds",
+    "category_id": 4,
+    "item_url":"garden-pod"
+  },
+  {
+    "title": "Garden Office",
+    "image": "https://www.compositegardenbuildings.co.uk/wp-content/uploads/2020/09/garden-fitness-centre-northampton-1.jpg?fit=2560%2C1920&ssl=1?w=570&h=320",
+    "description": "Plastic builds",
+    "category_id": 4,
+    "item_url":"garden-office"
+  },
+  {
+    "title": "Faux Wood Build",
+    "image": "https://cdn.mos.cms.futurecdn.net/VwxQRWBDWjvQ85HPQELrMm-768-80.jpg?fit=2560%2C1920&ssl=1?w=570&h=320",
+    "description": "Plastic builds",
+    "category_id": 4,
+    "item_url":"faux-wood-build"
+  }
+]

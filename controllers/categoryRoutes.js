@@ -112,10 +112,10 @@ router.put('/edit/:category_url', withAuth, async (req, res) => {
 // ------------ Routes for Single Job Page -------------
 
 // Gets single job page and comments
-router.get('/:category_url', withAuth, async (req, res) => {
+router.get('/:category_url', async (req, res) => {
   try {
     //find the category
-    const category = await Category.findOne({
+    const thisCategory = await Category.findOne({
       where: {
         category_url: req.params.category_url
       },
@@ -123,10 +123,11 @@ router.get('/:category_url', withAuth, async (req, res) => {
 
     const allItems = await Item.findAll({
       where: {
-        category_id: category.id,
+        category_id: thisCategory.id,
       }
     });
-    console.log("Item: " + JSON.stringify(category));
+
+    const category = thisCategory.dataValues;
 
     if (!category) {
       res.status(404).json(
@@ -139,6 +140,7 @@ router.get('/:category_url', withAuth, async (req, res) => {
     const items = allItems.map((item) => item.get({ plain: true }));
 
     res.render('singleCategory', {
+      category,
       items,
       logged_in: req.session.logged_in,
     });

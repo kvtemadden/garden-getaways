@@ -24,7 +24,7 @@ const updateItem = async (event) => {
       method: 'PUT',
       body: JSON.stringify({
         title: title,
-        category: category,
+        category_id: category,
         description: description,
         image: image,
         item_url: itemURL,

@@ -1,20 +1,20 @@
 var imgPreview = document.getElementById('img-preview');
+
+//get current item url
+
 var id = window.location.href.toString().split('categories/')[1];
  
   if (id.includes("edit/")) {
     id = id.split('edit/')[1];
   }
 
-  console.log(id)
 const updateCategory = async (event) => {
-  debugger;
   event.preventDefault();
   
   var title = document.querySelector('#newCategoryTitle').innerHTML;
   var description = document.querySelector('#newCategoryDescription').innerHTML;
   var image = imgPreview.src;
-
-  
+  var url = title.replace(/\s+/g, '-').toLowerCase();  
 
   const response = await fetch("/categories/edit/"+id, {
       method: 'PUT',
@@ -22,6 +22,7 @@ const updateCategory = async (event) => {
         title: title,
         description: description,
         image: image,
+        category_url: url
       }),
       headers: { 'Content-Type': 'application/json' },
     })

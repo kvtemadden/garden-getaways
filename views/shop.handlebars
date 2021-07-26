@@ -1,0 +1,14 @@
+<div class="container-fluid justify-content-center mt-5">
+
+<h2>Browse by category</h2>
+
+<div class="row category-row">
+{{#each categories as |category| }}
+<div class="col-xs-6 col-sm-4 col-xl-3 mt-5 idv">
+    <a href="/categories/{{category.category_url}}"><div class="cat-img" style="background-image: url({{category.image}})"></div></a>
+    <a href="/categories/{{category.category_url}}"><h4>{{category.title}}</h4></a>
+</div>
+{{/each}}
+</div>
+
+</div>

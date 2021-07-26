@@ -1,12 +1,12 @@
 <section>
-    <div class="row mx-auto">
+    <div class="row mx-auto justify-content-center">
         <div class="border col-sm-11 col-md-5 m-3 p-3">
             <h3 class="mb-5 float-l">Categories</h3>
             <a class="btn white float-r" href="categories/new">Add a new category +</a>
             {{#each categories as |category| }}
             <div class="col-12 mb-5 clbt row admin-list">
                 <img class="sm-display-img col-2" src={{category.image}} />
-                <div class="col-10">
+                <div class="col-8">
                     <h3 class="padding job-header"><a
                             href="/categories/{{category.category_url}}">{{category.title}}</a></h3>
                     <a class="edit-btn" href="/categories/edit/{{category_url}}">Edit</a><a class="delete-btn"
@@ -17,7 +17,7 @@
             </div>
             {{/each}}
         </div>
-        <div class="border col-sm-11 col-md-6 m-3 p-3">
+        <div class="border col-sm-11 col-md-5 m-3 p-3">
 
             <h3 class="mb-3 float-l">All items</h3>
             <a class="btn white float-r" href="items/new">Add a new item +</a>
@@ -33,7 +33,7 @@
             {{#each items as |item| }}
             <div class="col-12 mb-5 clbt row admin-list">
                 <img class="sm-display-img col-2" src={{item.image}} />
-                <div class="col-10">
+                <div class="col-8">
                     <h3 class="padding job-header"><a href="/categories/{{item.item_url}}">{{item.title}}</a></h3>
                     <a class="edit-btn" href="/items/edit/{{item_url}}">Edit</a><a class="delete-btn"
                         data-toggle="modal" data-target="#deleteModal" data-type="Item"

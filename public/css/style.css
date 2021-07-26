@@ -37,6 +37,28 @@ a {
     width: 80px!important;
 }
 
+.category-row {
+  width: 100%;
+  height: 500px;
+  justify-content: space-evenly;
+  margin: 0px;
+}
+
+.idv {
+  min-height: 200px;
+  min-width: 350px;
+}
+
+.cat-img {
+  background-size: cover;
+  max-height: 400px;
+  max-width: 500px;
+  min-width: 150px;
+  min-height: 250px;
+  height: 100%;
+  width: 100%;
+}
+
 .admin-list { 
   height: 80px;
 }

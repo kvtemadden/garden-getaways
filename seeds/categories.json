@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Wood",
+    "image": "https://www.crownpavilions.com/wp-content/uploads/2020/10/Sandringham_600x450.png?w=570&h=320",
+    "description": "Wooden builds",
+    "category_url":"wood"
+  },
+  {
+    "title": "Glass",
+    "image": "https://loveincorporated.blob.core.windows.net/contentimages/gallery/98bd16ff-6b2c-4d62-b7c5-fb5721bf8b91-Holt-Studio_gardenroos.jpg?w=570&h=320",
+    "description": "Majority glass builds",
+    "category_url":"glass"
+  },
+  {
+    "title": "Brick",
+    "image": "https://www.bathstonegardenrooms.co.uk/wp-content/uploads/2015/03/banner-1.jpg?w=570&h=320",
+    "description": "Brick builds",
+    "category_url":"brick"
+  },
+  {
+    "title": "Plastic",
+    "image": "https://www.homelodge.co.uk/images/square/upload/52a39f4032397Homelodge_garden_hobbies_room.jpg?w=570&h=320",
+    "description": "Plastic builds",
+    "category_url":"plastic"
+  }
+]
